@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ziko's Contact</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            color: white;
+            height: 100%;
+            overflow: hidden;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Video Background */
+        video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1;
+            object-fit: cover;
+            filter: brightness(50%);
+        }
+
+        h2 {
+            color: #ff6347;
+            font-size: 3em;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        h3 {
+            color: #4682b4;
+            font-size: 2em;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        p {
+            color: #fff;
+            font-size: 1.5em;
+            text-shadow: 1px 1px 3px #000;
+            margin: 10px 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: #00ffcc;
+            font-size: 1.8em;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #ff4081;
+        }
+
+        .highlight {
+            font-size: 22px;
+            color: #ff4500;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        /* Button for video play */
+        #playButton {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            font-size: 1.2em;
+            background-color: #00ffcc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        #playButton:hover {
+            background-color: #ff4081;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 2em;
+            }
+
+            h3 {
+                font-size: 1.5em;
+            }
+
+            p {
+                font-size: 1.2em;
+            }
+
+            a {
+                font-size: 1.5em;
+            }
+
+            #playButton {
+                font-size: 1em;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Video -->
+    <video autoplay loop controls id="backgroundVideo">
+        <source src="https://github.com/ClaudiZiko/zikoganteng/blob/714c3573b4c6c75439f9ec739e73b8a0b09f892d/ssstik.io_1727786150807.mp4?raw=true" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+
+    <!-- Content -->
+    <div class="content">
+        <h2>Untuk Kontak Saya 😎</h2>
+        <h3>Gampang banget, tinggal salin nomernya bro! 🚀</h3>
+        <br>
+        <p>WhatsApp: <span class="highlight">nomornya ilang, entah kemana 😱</span></p>
+        <p>Phone Number: <span class="highlight">jangan dihubungi, lagi sibuk 🤕</span></p>
+        <br>
+        <a href="home.html">Balik ke beranda deh! ✌️</a>
+    </div>
+
+    <!-- Play button -->
+    <button id="playButton">Play</button>
+
+    <script>
+        const video = document.getElementById('backgroundVideo');
+        const playButton = document.getElementById('playButton');
+
+        // Button to restart video playback
+        playButton.addEventListener('click', () => {
+            video.play();
+        });
+    </script>
+</body>
+</html>

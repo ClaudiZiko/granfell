@@ -1,0 +1,355 @@
+/* --- RESET & FONT DASAR --- */
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Space Mono', monospace;
+  color: #E0E0F0;
+  background-color: #0A0A1A;
+  overflow-x: hidden;
+  line-height: 1.6;
+  position: relative;
+}
+
+/* --- BACKGROUND UTAMA YANG BERGULIR --- */
+.main-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://raw.githubusercontent.com/ClaudiZiko/OnlyMee/4dba083e1584598b345bef68af151b7f3ab29fe9/1750136188207.jpg');
+  background-size: cover;
+  background-position: center top;
+  z-index: -2;
+  will-change: background-position-y, filter;
+  filter: blur(8px);
+  transition: filter 0.8s ease-out;
+}
+
+/* OVERLAY HITAM TRANSPARAN DI ATAS BACKGROUND */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: -1;
+  pointer-events: none;
+}
+
+a {
+  color: #00FFFF;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #00DCDC;
+}
+
+/* --- UTILITY CLASSES --- */
+.content-center {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-left {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-left: 10vw;
+}
+
+.content-right {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  padding-right: 10vw;
+}
+
+/* --- SECTION / SCENE UTAMA --- */
+.scene {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.scene-background {
+  display: none;
+}
+
+.scene-content {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* --- TYPOGRAPHY --- */
+h1, h2, h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  color:whitesmoke;
+  text-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+}
+
+h1 {
+  font-size: 4.5em;
+}
+
+h2 {
+  font-size: 3em;
+}
+
+h3 {
+  font-size: 1.8em;
+  margin-bottom: 10px;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+}
+
+p {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 1.1em;
+  margin-bottom: 15px;
+  color: whitesmoke;
+  text-shadow: 0 0 5px rgba(7, 90, 132, 0.8), 0 0 10px rgba(5, 91, 140, 0.5);
+}
+
+/* --- POP-UP CARDS & BLOK KONTEN (EFEK HOVER) --- */
+.pop-up-card, .info-card, .feature-block, .quote-card {
+  background: rgba(10, 20, 30, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 30px;
+  margin: 20px auto;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  max-width: 500px;
+  width: 90%;
+  opacity: 0;
+  transform: scale(0.8);
+  will-change: transform, opacity, filter, box-shadow;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.pop-up-card:hover, .info-card:hover, .feature-block:hover, .quote-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 40px rgba(0, 255, 255, 0.7), 0 0 60px rgba(0, 255, 255, 0.4);
+  border-color: rgba(0, 255, 255, 0.5);
+}
+
+.pop-up-card.appear {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.pop-up-icon {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 20px;
+  filter: blur(5px);
+  transition: filter 0.8s ease-out;
+}
+
+/* Info Grid */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  width: 100%;
+}
+
+.info-card {
+  padding: 25px;
+  text-align: center;
+  background: rgba(10, 20, 30, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+/* Feature Block */
+.feature-block {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  max-width: 800px;
+  width: 95%;
+  background: rgba(10, 20, 30, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 25px 35px;
+  margin: 25px auto;
+}
+
+.feature-block:nth-child(even) {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.feature-image {
+  width: 200px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 255, 255, 0.1);
+  filter: blur(8px);
+  transition: filter 0.8s ease-out;
+}
+
+.feature-text h3 {
+  margin-top: 0;
+}
+
+/* Quote Card */
+.quote-card {
+  font-size: 1.3em;
+  font-style: italic;
+  color: #90FFFF;
+  border-left: 5px solid #00FFFF;
+  padding-left: 20px;
+}
+
+.quote-card span {
+  display: block;
+  font-size: 0.8em;
+  margin-top: 10px;
+  color: #B0B0C0;
+}
+
+/* --- STATS CONTAINER --- */
+.stats-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+
+.stat-box {
+  background: rgba(0, 255, 255, 0.1);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+  padding: 20px 30px;
+  border-radius: 12px;
+  margin: 10px;
+  min-width: 150px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media screen and (max-width: 768px) {
+  h1 {
+    font-size: 3em;
+  } 
+
+  h2 {
+    font-size: 2.2em;
+  }
+
+  .feature-block {
+    flex-direction: column !important;
+    text-align: center !important;
+  }
+
+  .feature-block:nth-child(even) {
+    flex-direction: column !important;
+  }
+
+  .feature-image {
+    width: 100%;
+    height: auto;
+  }
+
+  .content-left,
+  .content-right {
+    padding: 0 5vw;
+    align-items: center !important;
+    text-align: center !important;
+  }
+}
+
+/* --- ANIMASI MASUK (JIKA DIGUNAKAN) --- */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Tambahan kelas untuk animasi saat masuk viewport */
+.fade-in-up {
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+/* --- SOCIAL ICONS STYLING --- */
+.social-icons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.social-icons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background: rgba(0, 255, 255, 0.1);
+  border: 2px solid rgba(0, 255, 255, 0.3);
+  border-radius: 50%;
+  color: #00FFFF;
+  font-size: 24px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.social-icons a:hover {
+  background: rgba(0, 255, 255, 0.3);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+  transform: scale(1.1);
+  color: #FFFFFF;
+}

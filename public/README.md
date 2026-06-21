@@ -42,3 +42,8 @@ public/
 
 ---
 *Website dibuat oleh Ziko*
+
+## this is my firstime i lern html
+ hehehe
+
+ 

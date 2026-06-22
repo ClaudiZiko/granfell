@@ -18,6 +18,17 @@ body {
   overflow-x: hidden;
   line-height: 1.6;
   position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+body * {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 /* --- BACKGROUND UTAMA YANG BERGULIR --- */

@@ -222,6 +222,19 @@
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
+
+    <script>
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.addEventListener('copy', event => event.preventDefault());
+        document.addEventListener('cut', event => event.preventDefault());
+        document.addEventListener('dragstart', event => event.preventDefault());
+        document.addEventListener('keydown', event => {
+            const blockedKeys = ['c', 'x', 'u', 's'];
+            if ((event.ctrlKey || event.metaKey) && blockedKeys.includes(event.key.toLowerCase())) {
+                event.preventDefault();
+            }
+        });
+    </script>
     
 </body>
 </html>

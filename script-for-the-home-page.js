@@ -15,12 +15,17 @@ const defaultDuration = 1.2;
 // Ini memungkinkan animasi GSAP menggunakan nilai delay yang didefinisikan dalam kelas HTML.
 function getDelayValue(element) {
     let delayValue = 0;
-    for (let i = 0; i <= 5; i++) { // Mendukung element-delay-0 hingga element-delay-5
-        if (element.classList.contains(`element-delay-${i}`)) {
-            delayValue = i * 0.2; // Setiap 1 unit delay = 0.2 detik
-            break; // Hentikan pencarian setelah menemukan kelas delay pertama
+
+    element.classList.forEach(className => {
+        const match = className.match(/^element-delay-(\d+)(?:-(\d+))?$/);
+        if (match) {
+            const whole = parseInt(match[1], 10);
+            const fraction = match[2] ? parseInt(match[2], 10) : 0;
+            const value = fraction ? parseFloat(`${whole}.${fraction}`) : whole;
+            delayValue = Math.max(delayValue, value * 0.2);
         }
-    }
+    });
+
     return delayValue;
 }
 
@@ -364,13 +369,10 @@ gsap.to(".main-background", {
     backgroundPositionY: () => {
         const scrollHeight = document.querySelector("#smooth-content").scrollHeight;
         const viewportHeight = window.innerHeight;
-        // Hitung seberapa jauh background harus bergerak agar "terlihat" tetap di tempat relatif terhadap konten yang bergerak.
-        // Math.max(0, ...) untuk mencegah nilai negatif jika konten lebih pendek dari viewport.
         return `-${Math.max(0, scrollHeight - viewportHeight)}px`;
     },
     ease: "none", // Pastikan tidak ada ease agar sinkron dengan scroll
     scrollTrigger: {
-        scroller: "#smooth-wrapper", // Pastikan scroller diset ke elemen yang smooth scrolling-nya aktif
         trigger: "#smooth-content",
         start: "top top",
         end: "bottom bottom",

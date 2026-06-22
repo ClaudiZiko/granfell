@@ -15,17 +15,12 @@ const defaultDuration = 1.2;
 // Ini memungkinkan animasi GSAP menggunakan nilai delay yang didefinisikan dalam kelas HTML.
 function getDelayValue(element) {
     let delayValue = 0;
-
-    element.classList.forEach(className => {
-        const match = className.match(/^element-delay-(\d+)(?:-(\d+))?$/);
-        if (match) {
-            const whole = parseInt(match[1], 10);
-            const fraction = match[2] ? parseInt(match[2], 10) : 0;
-            const value = fraction ? parseFloat(`${whole}.${fraction}`) : whole;
-            delayValue = Math.max(delayValue, value * 0.2);
+    for (let i = 0; i <= 5; i++) { // Mendukung element-delay-0 hingga element-delay-5
+        if (element.classList.contains(`element-delay-${i}`)) {
+            delayValue = i * 0.2; // Setiap 1 unit delay = 0.2 detik
+            break; // Hentikan pencarian setelah menemukan kelas delay pertama
         }
-    });
-
+    }
     return delayValue;
 }
 
@@ -56,11 +51,20 @@ gsap.timeline({ delay: 0.5 }) // Beri sedikit delay agar background blur sempat 
         }, "<0.5") // Mulai 0.5 detik setelah animasi sebelumnya (sub-judul)
     // Animasi Typing Text untuk intro (jika ada)
     // Memastikan `TextPlugin` berfungsi jika diaktifkan.
-    .from(".scene-intro .typing-text.element-delay-4", {
-        textContent: "", // Mulai dari teks kosong
-        duration: 2, // Sesuaikan durasi pengetikan
-        ease: "none" // Efek pengetikan biasanya tanpa ease
-    }, "<"); // Mulai bersamaan dengan pop-up atau sedikit setelahnya
+    .add(() => {
+        const introTyping = document.querySelector(".scene-intro .typing-text.element-delay-4");
+        if (introTyping) {
+            const originalText = introTyping.textContent;
+            introTyping.textContent = "";
+            gsap.fromTo(introTyping, {
+                text: ""
+            }, {
+                text: originalText,
+                duration: 2,
+                ease: "none"
+            });
+        }
+    }, "<");
 
 // --- Animasi Background Blur di Awal (Dihilangkan saat Scroll di Scene Intro) ---
 // Blur background akan menghilang secara mulus saat Anda mulai scroll di scene pertama.
@@ -369,10 +373,13 @@ gsap.to(".main-background", {
     backgroundPositionY: () => {
         const scrollHeight = document.querySelector("#smooth-content").scrollHeight;
         const viewportHeight = window.innerHeight;
+        // Hitung seberapa jauh background harus bergerak agar "terlihat" tetap di tempat relatif terhadap konten yang bergerak.
+        // Math.max(0, ...) untuk mencegah nilai negatif jika konten lebih pendek dari viewport.
         return `-${Math.max(0, scrollHeight - viewportHeight)}px`;
     },
     ease: "none", // Pastikan tidak ada ease agar sinkron dengan scroll
     scrollTrigger: {
+        scroller: "#smooth-wrapper", // Pastikan scroller diset ke elemen yang smooth scrolling-nya aktif
         trigger: "#smooth-content",
         start: "top top",
         end: "bottom bottom",

@@ -18,17 +18,6 @@ body {
   overflow-x: hidden;
   line-height: 1.6;
   position: relative;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-body * {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 }
 
 /* --- BACKGROUND UTAMA YANG BERGULIR --- */
@@ -107,10 +96,6 @@ a:hover {
   justify-content: center;
   overflow: hidden;
   background-color: transparent;
-}
-
-.scene-background {
-  display: none;
 }
 
 .scene-content {
@@ -269,7 +254,7 @@ p {
   margin-top: 40px;
 }
 
-.stat-box {
+.stat-item { /*tanda untuk stat-box*/
   background: rgba(0, 255, 255, 0.1);
   border: 1px solid rgba(0, 255, 255, 0.3);
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
@@ -281,7 +266,7 @@ p {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.stat-box:hover {
+.stat-item:hover {  /*tanda untuk stat-box*/
   transform: scale(1.05);
   box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
 }
@@ -318,23 +303,6 @@ p {
   }
 }
 
-/* --- ANIMASI MASUK (JIKA DIGUNAKAN) --- */
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Tambahan kelas untuk animasi saat masuk viewport */
-.fade-in-up {
-  animation: fadeInUp 1s ease-out forwards;
-}
-
 /* --- SOCIAL ICONS STYLING --- */
 .social-icons {
   display: flex;
@@ -363,4 +331,224 @@ p {
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
   transform: scale(1.1);
   color: #FFFFFF;
+}
+
+/* --- LOGO GRID --- */
+.logo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 40px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  width: 100%;
+  align-items: center;
+  justify-items: center;
+}
+
+.logo-item {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  filter: grayscale(100%) opacity(0.7);
+  transition: filter 0.4s ease, transform 0.4s ease;
+}
+
+.logo-item:hover {
+  filter: grayscale(0%) opacity(1);
+  transform: scale(1.1);
+}
+
+/* --- ETHICS LIST --- */
+.ethics-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.ethics-list li {
+  font-size: 1.1em;
+  padding: 15px 0;
+  padding-left: 30px;
+  position: relative;
+  color: #E0E0F0;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.ethics-list li:before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #00FFFF;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+/* --- CITY HOTSPOTS --- */
+.city-hotspots {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  background: rgba(10, 20, 30, 0.5);
+  border-radius: 15px;
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  overflow: hidden;
+  margin-top: 30px;
+}
+
+.hotspot-item {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.hotspot-dot {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: rgba(0, 255, 255, 0.8);
+  border: 2px solid #00FFFF;
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.8), 0 0 25px rgba(0, 255, 255, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(0, 255, 255, 1), 0 0 40px rgba(0, 255, 255, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.8), 0 0 25px rgba(0, 255, 255, 0.4);
+  }
+}
+
+.hotspot-info {
+  background: rgba(10, 20, 30, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.hotspot-item:hover .hotspot-info {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.hotspot-info p {
+  margin: 0;
+  color: #00FFFF;
+  font-size: 0.95em;
+}
+
+/* --- CTA BUTTON --- */
+.cta-button {
+  display: inline-block;
+  padding: 15px 40px;
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(0, 200, 200, 0.2));
+  border: 2px solid #00FFFF;
+  border-radius: 50px;
+  color: #00FFFF;
+  font-size: 1.1em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+.cta-button:hover {
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.4), rgba(0, 200, 200, 0.4));
+  box-shadow: 0 0 40px rgba(0, 255, 255, 0.7);
+  transform: scale(1.05);
+  color: #FFFFFF;
+}
+
+/* --- CONTACT INFO --- */
+.contact-info {
+  background: rgba(10, 20, 30, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 15px;
+  padding: 40px;
+  margin: 20px auto;
+  max-width: 600px;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+}
+
+.contact-info p {
+  font-size: 1.1em;
+  margin-bottom: 15px;
+  color: whitesmoke;
+}
+
+.contact-info a {
+  color: #00FFFF;
+  transition: color 0.3s ease;
+}
+
+.contact-info a:hover {
+  color: #00DCDC;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+}
+
+/* --- SITE FOOTER --- */
+.site-footer {
+  background: rgba(10, 10, 20, 0.95);
+  border-top: 1px solid rgba(0, 255, 255, 0.2);
+  padding: 40px 20px;
+  text-align: center;
+  margin-top: 60px;
+}
+
+.site-footer p {
+  margin-bottom: 15px;
+  color: #B0B0C0;
+  font-size: 0.95em;
+}
+
+.site-footer a {
+  color: #00FFFF;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.site-footer a:hover {
+  color: #00DCDC;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+}
+
+/* --- RESPONSIVE ADJUSTMENTS FOR NEW CLASSES --- */
+@media screen and (max-width: 768px) {
+  .logo-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .city-hotspots {
+    height: 300px;
+  }
+
+  .cta-button {
+    padding: 12px 30px;
+    font-size: 1em;
+  }
+
+  .contact-info {
+    padding: 25px;
+  }
 }
